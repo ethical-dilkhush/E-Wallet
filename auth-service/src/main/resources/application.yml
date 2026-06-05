@@ -1,0 +1,36 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: auth-service
+
+ewallet:
+  security:
+    jwt:
+      secret: ${EWALLET_JWT_SECRET:U3RlcmxpbmctRVdhbGxldC1TdXBlci1TZWNyZXQtS2V5LU11c3QtQmUtTG9uZy1FbnVnaC0yNTYtYml0cw==}
+      access-token-validity-ms: 3600000
+      refresh-token-validity-ms: 86400000
+      issuer: sterling-ewallet
+  internal:
+    secret: ${EWALLET_INTERNAL_SECRET:ewallet-internal-svc-shared-secret-change-me}
+
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka/}
+  instance:
+    prefer-ip-address: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: always
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
