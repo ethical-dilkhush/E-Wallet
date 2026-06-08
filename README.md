@@ -19,7 +19,7 @@ and fail independently, and communicate primarily through asynchronous events.
         │                             │                             │
         ▼                             ▼                             ▼
 ┌────────────────┐         ┌────────────────┐           ┌──────────────────┐
-│  API Gateway   │ :8080   │ Auth Service   │ :8081     │  User Service    │ :8082
+│  API Gateway   │ :8080   │ Auth Service   │ :18081    │  User Service    │ :8082
 │ Spring Cloud   │ ──────► │ JWT issuer     │ ────────► │ Registration,    │
 │  Gateway       │   JWT   │ /api/auth/*    │  Feign    │ credentials,     │
 │                │         │                │           │ profile          │
@@ -48,7 +48,7 @@ and fail independently, and communicate primarily through asynchronous events.
 | ------------------- | ---- | ------------------------------------------------------------------------------ |
 | `eureka-server`     | 8761 | Service discovery (Spring Cloud Netflix Eureka)                                |
 | `api-gateway`       | 8080 | Single entry point, JWT validation, routing                                    |
-| `auth-service`      | 8081 | Login, refresh, JWT issuance & validation (calls user-service via Feign)       |
+| `auth-service`      | 18081 | Login, refresh, JWT issuance & validation (calls user-service via Feign). Port 18081 avoids conflict with McAfee on Windows (:8081). |
 | `user-service`      | 8082 | User registration, profile, credential verification; emits `UserRegistered`    |
 | `wallet-service`    | 8083 | Wallet balance, credit/debit, ledger; consumes user & transaction events       |
 | `transaction-service`| 8084| Initiates transfers / merchant payments / top-ups; consumes wallet results     |
