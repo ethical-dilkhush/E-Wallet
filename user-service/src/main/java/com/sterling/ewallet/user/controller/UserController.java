@@ -2,6 +2,8 @@ package com.sterling.ewallet.user.controller;
 
 import com.sterling.ewallet.common.dto.ApiResponse;
 import com.sterling.ewallet.common.dto.UserDto;
+import com.sterling.ewallet.user.dto.ChangePasswordRequest;
+import com.sterling.ewallet.user.dto.UpdateProfileRequest;
 import com.sterling.ewallet.user.dto.UserRegistrationRequest;
 import com.sterling.ewallet.user.service.UserService;
 import jakarta.validation.Valid;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -61,6 +64,21 @@ public class UserController {
     @GetMapping("/me")
     public ResponseEntity<ApiResponse<UserDto>> me(@RequestHeader("X-User-Id") String userId) {
         return ResponseEntity.ok(ApiResponse.ok(userService.getById(userId)));
+    }
+
+    @PutMapping("/me")
+    public ResponseEntity<ApiResponse<UserDto>> updateMe(
+            @RequestHeader("X-User-Id") String userId,
+            @Valid @RequestBody UpdateProfileRequest request) {
+        return ResponseEntity.ok(ApiResponse.ok("Profile updated", userService.updateProfile(userId, request)));
+    }
+
+    @PutMapping("/me/password")
+    public ResponseEntity<ApiResponse<Void>> changePassword(
+            @RequestHeader("X-User-Id") String userId,
+            @Valid @RequestBody ChangePasswordRequest request) {
+        userService.changePassword(userId, request);
+        return ResponseEntity.ok(ApiResponse.ok("Password changed successfully", null));
     }
 
     @DeleteMapping("/{id}")

@@ -46,6 +46,12 @@ spring:
             - Path=/api/payments/**
           filters:
             - name: JwtAuthenticationFilter
+        - id: agent-service
+          uri: lb://agent-service
+          predicates:
+            - Path=/api/agent/**
+          filters:
+            - name: JwtAuthenticationFilter
 
 ewallet:
   security:

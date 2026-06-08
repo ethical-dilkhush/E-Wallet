@@ -9,6 +9,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 
@@ -41,6 +42,10 @@ public class UserEntity {
 
     @Column(length = 20)
     private String phone;
+
+    @Lob
+    @Column(name = "avatar", columnDefinition = "CLOB")
+    private String avatar;
 
     @Column(nullable = false)
     private boolean active = true;
@@ -112,6 +117,14 @@ public class UserEntity {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     public boolean isActive() {

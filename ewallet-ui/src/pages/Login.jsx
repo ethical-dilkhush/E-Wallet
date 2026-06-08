@@ -46,20 +46,6 @@ export default function Login() {
           <p className="text-lg text-primary-100 leading-relaxed">
             Your trusted digital wallet for secure transfers, payments, and financial freedom.
           </p>
-          <div className="mt-10 grid grid-cols-3 gap-6 text-center">
-            <div>
-              <div className="text-3xl font-bold">50K+</div>
-              <div className="text-sm text-primary-200">Active Users</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold">99.9%</div>
-              <div className="text-sm text-primary-200">Uptime</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold">$2M+</div>
-              <div className="text-sm text-primary-200">Processed</div>
-            </div>
-          </div>
         </div>
       </div>
 
@@ -118,7 +104,7 @@ export default function Login() {
                 <input type="checkbox" name="remember" checked={form.remember} onChange={handle} className="w-4 h-4 rounded border-gray-300 text-primary-600 focus:ring-primary-500" />
                 Remember me
               </label>
-              <a href="#" className="text-sm font-medium text-primary-600 hover:text-primary-700">Forgot password?</a>
+              <Link to="/forgot-password" className="text-sm font-medium text-primary-600 hover:text-primary-700">Forgot password?</Link>
             </div>
 
             <button

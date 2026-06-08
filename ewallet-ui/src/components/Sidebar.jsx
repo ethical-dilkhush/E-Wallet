@@ -7,6 +7,7 @@ import {
   User,
   LogOut,
   Wallet,
+  Sparkles,
   X,
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
@@ -16,6 +17,7 @@ const links = [
   { to: '/transfer', label: 'Send Money', icon: SendHorizontal },
   { to: '/topup', label: 'Add Funds', icon: PlusCircle },
   { to: '/transactions', label: 'Transactions', icon: History },
+  { to: '/sterling-agent', label: 'Sterling Agent', icon: Sparkles },
   { to: '/profile', label: 'Profile', icon: User },
 ];
 

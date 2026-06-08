@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { PlusCircle, CheckCircle, ShieldCheck } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useNotifications } from '../context/NotificationContext';
@@ -30,9 +30,18 @@ export default function Topup() {
   const notify = useNotifications();
   const navigate = useNavigate();
 
+  const [searchParams] = useSearchParams();
   const [amount, setAmount] = useState('');
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(null);
+
+  // Prefill the amount when arriving from the browser extension (e.g. ?amount=500).
+  useEffect(() => {
+    const preset = searchParams.get('amount');
+    if (preset && !Number.isNaN(parseFloat(preset))) {
+      setAmount(String(parseFloat(preset)));
+    }
+  }, [searchParams]);
 
   const selectPreset = (val) => setAmount(String(val));
 

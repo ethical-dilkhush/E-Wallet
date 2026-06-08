@@ -1,13 +1,11 @@
 import { createContext, useContext, useState, useCallback, useEffect } from 'react';
 import { authApi, userApi, walletApi } from '../services/api';
+import { notifyBridgeLogin, notifyBridgeLogout, subscribeBridgeAuth, waitForAuthBridge } from '../lib/authBridge';
 
 const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(() => {
-    const stored = localStorage.getItem('user');
-    return stored ? JSON.parse(stored) : null;
-  });
+  const [user, setUser] = useState(null);
   const [wallet, setWallet] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -26,10 +24,6 @@ export function AuthProvider({ children }) {
     return null;
   }, []);
 
-  // Top-ups / transfers settle asynchronously (the backend publishes an event
-  // and the wallet is credited/debited a moment later). Poll the wallet a few
-  // times until `predicate(wallet)` is satisfied so the UI reflects the new
-  // balance without a manual refresh.
   const pollWallet = useCallback(
     async (predicate, { attempts = 8, interval = 700 } = {}) => {
       let latest = null;
@@ -52,29 +46,80 @@ export function AuthProvider({ children }) {
         const u = res.data.data;
         setUser(u);
         localStorage.setItem('user', JSON.stringify(u));
+        return u;
       }
     } catch {
       /* will 401 → interceptor handles */
     }
+    return null;
   }, []);
 
-  useEffect(() => {
+  const hydrateFromStorage = useCallback(async () => {
     const token = localStorage.getItem('accessToken');
-    if (token) {
-      Promise.all([fetchProfile(), fetchWallet()]).finally(() => setLoading(false));
-    } else {
-      setLoading(false);
+    if (!token) {
+      setUser(null);
+      setWallet(null);
+      return;
     }
+
+    const stored = localStorage.getItem('user');
+    if (stored) {
+      try {
+        setUser(JSON.parse(stored));
+      } catch {
+        setUser(null);
+      }
+    }
+
+    await Promise.all([fetchProfile(), fetchWallet()]);
   }, [fetchProfile, fetchWallet]);
+
+  useEffect(() => {
+    let active = true;
+
+    (async () => {
+      await waitForAuthBridge();
+      if (!active) return;
+      await hydrateFromStorage();
+      if (active) setLoading(false);
+    })();
+
+    return () => {
+      active = false;
+    };
+  }, [hydrateFromStorage]);
+
+  useEffect(() => {
+    return subscribeBridgeAuth({
+      onSync: async () => {
+        await hydrateFromStorage();
+      },
+      onLogout: () => {
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('refreshToken');
+        localStorage.removeItem('user');
+        localStorage.removeItem('authUpdatedAt');
+        setUser(null);
+        setWallet(null);
+      },
+    });
+  }, [hydrateFromStorage]);
 
   const login = useCallback(async (username, password) => {
     const res = await authApi.login({ username, password });
     const { accessToken, refreshToken, userId, username: uname } = res.data.data;
+    const authUpdatedAt = Date.now();
+
     localStorage.setItem('accessToken', accessToken);
     localStorage.setItem('refreshToken', refreshToken);
+    localStorage.setItem('authUpdatedAt', String(authUpdatedAt));
+
     const u = { id: userId, username: uname };
     localStorage.setItem('user', JSON.stringify(u));
     setUser(u);
+
+    notifyBridgeLogin({ accessToken, refreshToken, user: u });
+
     await Promise.all([fetchProfile(), fetchWallet()]);
     return res.data;
   }, [fetchProfile, fetchWallet]);
@@ -83,8 +128,10 @@ export function AuthProvider({ children }) {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
     localStorage.removeItem('user');
+    localStorage.removeItem('authUpdatedAt');
     setUser(null);
     setWallet(null);
+    notifyBridgeLogout();
   }, []);
 
   const refreshWallet = fetchWallet;

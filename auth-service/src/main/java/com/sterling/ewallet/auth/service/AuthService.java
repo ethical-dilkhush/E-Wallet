@@ -3,10 +3,13 @@ package com.sterling.ewallet.auth.service;
 import com.sterling.ewallet.auth.client.UserCredentialsRequest;
 import com.sterling.ewallet.auth.client.UserCredentialsResponse;
 import com.sterling.ewallet.auth.client.UserServiceClient;
+import com.sterling.ewallet.auth.dto.ForgotPasswordRequest;
 import com.sterling.ewallet.auth.dto.LoginRequest;
+import com.sterling.ewallet.auth.dto.ResetPasswordRequest;
 import com.sterling.ewallet.auth.dto.TokenResponse;
 import com.sterling.ewallet.auth.jwt.JwtTokenProvider;
 import com.sterling.ewallet.common.dto.ApiResponse;
+import feign.FeignException;
 import io.jsonwebtoken.Claims;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,8 +32,16 @@ public class AuthService {
     }
 
     public TokenResponse login(LoginRequest request) {
-        ApiResponse<UserCredentialsResponse> response = userServiceClient.verifyCredentials(
-                new UserCredentialsRequest(request.getUsername(), request.getPassword()));
+        ApiResponse<UserCredentialsResponse> response;
+        try {
+            response = userServiceClient.verifyCredentials(
+                    new UserCredentialsRequest(request.getUsername(), request.getPassword()));
+        } catch (FeignException.NotFound | FeignException.Unauthorized ex) {
+            // user-service returns 404/401 when the username doesn't exist or the
+            // password doesn't match; surface a single clean message either way.
+            LOGGER.warn("Login failed for user {}: invalid credentials", request.getUsername());
+            throw new BadCredentialsException("Invalid username or password");
+        }
 
         if (response == null || !response.isSuccess() || response.getData() == null) {
             LOGGER.warn("Login failed for user {}", request.getUsername());
@@ -48,6 +59,25 @@ public class AuthService {
 
         return new TokenResponse(access, refresh, jwtTokenProvider.getAccessTokenValiditySeconds(),
                 user.getUserId(), user.getUsername());
+    }
+
+    public void forgotPassword(String email) {
+        // Fire-and-forget: user-service decides whether the email exists and
+        // publishes the reset email asynchronously. We never reveal the outcome
+        // to the caller, so swallow upstream errors and always succeed.
+        try {
+            userServiceClient.requestPasswordReset(new ForgotPasswordRequest(email));
+        } catch (FeignException ex) {
+            LOGGER.warn("Password reset request upstream issue for {}: status={}", email, ex.status());
+        }
+    }
+
+    public void resetPassword(String token, String newPassword) {
+        try {
+            userServiceClient.confirmPasswordReset(new ResetPasswordRequest(token, newPassword));
+        } catch (FeignException.BadRequest | FeignException.NotFound ex) {
+            throw new IllegalArgumentException("Invalid or expired reset link");
+        }
     }
 
     @SuppressWarnings("unchecked")

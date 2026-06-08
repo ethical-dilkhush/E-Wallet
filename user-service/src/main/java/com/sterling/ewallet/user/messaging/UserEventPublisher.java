@@ -1,5 +1,6 @@
 package com.sterling.ewallet.user.messaging;
 
+import com.sterling.ewallet.common.events.PasswordResetRequestedEvent;
 import com.sterling.ewallet.common.events.UserRegisteredEvent;
 import com.sterling.ewallet.common.messaging.RabbitTopics;
 import org.slf4j.Logger;
@@ -23,6 +24,14 @@ public class UserEventPublisher {
         rabbitTemplate.convertAndSend(
                 RabbitTopics.EWALLET_EXCHANGE,
                 RabbitTopics.USER_REGISTERED_ROUTING_KEY,
+                event);
+    }
+
+    public void publishPasswordResetRequested(PasswordResetRequestedEvent event) {
+        LOGGER.info("Publishing PasswordResetRequestedEvent for email={}", event.getEmail());
+        rabbitTemplate.convertAndSend(
+                RabbitTopics.EWALLET_EXCHANGE,
+                RabbitTopics.PASSWORD_RESET_ROUTING_KEY,
                 event);
     }
 }

@@ -1,0 +1,75 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --color-primary-50: #ecfeff;
+  --color-primary-100: #cffafe;
+  --color-primary-200: #a5f3fc;
+  --color-primary-300: #67e8f9;
+  --color-primary-400: #22d3ee;
+  --color-primary-500: #0891b2;
+  --color-primary-600: #0e7490;
+  --color-primary-700: #155e75;
+  --color-primary-800: #164e63;
+  --color-primary-900: #083344;
+
+  --color-success-50: #f0fdf4;
+  --color-success-500: #22c55e;
+  --color-success-600: #16a34a;
+
+  --color-warning-50: #fffbeb;
+  --color-warning-500: #f59e0b;
+  --color-warning-600: #d97706;
+
+  --color-danger-50: #fef2f2;
+  --color-danger-500: #ef4444;
+  --color-danger-600: #dc2626;
+
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+@layer base {
+  html,
+  body {
+    /* Chrome popups size to the body. Pin an explicit width/height so the popup
+       always renders at a consistent size instead of collapsing to content
+       width (which left empty space on the right). */
+    width: 400px;
+    height: 600px;
+    margin: 0;
+    padding: 0;
+    /* Transparent so the corners outside the rounded shell are see-through,
+       making the popup window itself appear rounded (one single shape). */
+    background: transparent;
+    /* Round the surface here too so the popup chrome clips to the radius. */
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  body {
+    @apply text-gray-900 font-sans antialiased;
+  }
+  /* The rounded card fills the entire popup: no outer frame, no gutter. */
+  #root {
+    width: 100%;
+    height: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #f9fafb;
+  }
+}
+
+/* Thin, unobtrusive scrollbars inside the popup */
+@layer utilities {
+  .popup-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e1 transparent;
+  }
+  .popup-scroll::-webkit-scrollbar {
+    width: 6px;
+  }
+  .popup-scroll::-webkit-scrollbar-thumb {
+    background-color: #cbd5e1;
+    border-radius: 9999px;
+  }
+}
+

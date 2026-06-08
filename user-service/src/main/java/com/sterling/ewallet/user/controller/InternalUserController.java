@@ -1,6 +1,8 @@
 package com.sterling.ewallet.user.controller;
 
 import com.sterling.ewallet.common.dto.ApiResponse;
+import com.sterling.ewallet.user.dto.PasswordResetConfirmRequest;
+import com.sterling.ewallet.user.dto.PasswordResetInitiateRequest;
 import com.sterling.ewallet.user.dto.UserCredentialsRequest;
 import com.sterling.ewallet.user.dto.UserCredentialsResponse;
 import com.sterling.ewallet.user.service.UserService;
@@ -33,5 +35,19 @@ public class InternalUserController {
     public ResponseEntity<ApiResponse<UserCredentialsResponse>> findByUsername(
             @RequestParam("username") String username) {
         return ResponseEntity.ok(ApiResponse.ok(userService.findByUsername(username)));
+    }
+
+    @PostMapping("/password-reset/request")
+    public ResponseEntity<ApiResponse<Void>> requestPasswordReset(
+            @Valid @RequestBody PasswordResetInitiateRequest request) {
+        userService.requestPasswordReset(request.getEmail());
+        return ResponseEntity.ok(ApiResponse.ok("Reset processed", null));
+    }
+
+    @PostMapping("/password-reset/confirm")
+    public ResponseEntity<ApiResponse<Void>> confirmPasswordReset(
+            @Valid @RequestBody PasswordResetConfirmRequest request) {
+        userService.resetPassword(request);
+        return ResponseEntity.ok(ApiResponse.ok("Password reset successfully", null));
     }
 }

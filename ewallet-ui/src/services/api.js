@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { notifyBridgeLogout } from '../lib/authBridge';
 
 const api = axios.create({
   baseURL: '/api',
@@ -20,6 +21,8 @@ api.interceptors.response.use(
       localStorage.removeItem('accessToken');
       localStorage.removeItem('refreshToken');
       localStorage.removeItem('user');
+      localStorage.removeItem('authUpdatedAt');
+      notifyBridgeLogout();
       if (window.location.pathname !== '/login') {
         window.location.href = '/login';
       }
@@ -32,11 +35,15 @@ export const authApi = {
   login: (data) => api.post('/auth/login', data),
   refresh: (refreshToken) => api.post('/auth/refresh', { refreshToken }),
   validate: () => api.post('/auth/validate'),
+  forgotPassword: (email) => api.post('/auth/forgot-password', { email }),
+  resetPassword: (data) => api.post('/auth/reset-password', data),
 };
 
 export const userApi = {
   register: (data) => api.post('/users/register', data),
   me: () => api.get('/users/me'),
+  updateProfile: (data) => api.put('/users/me', data),
+  changePassword: (data) => api.put('/users/me/password', data),
   getById: (id) => api.get(`/users/${id}`),
   search: (q) => api.get('/users/search', { params: { q } }),
 };
@@ -58,6 +65,11 @@ export const paymentApi = {
   createOrder: (data) => api.post('/payments/orders', data),
   // Verify the signature server-side; only then is the wallet credited.
   verify: (data) => api.post('/payments/verify', data),
+};
+
+export const agentApi = {
+  // Sends the session message history; wallet data is fetched server-side.
+  chat: (data) => api.post('/agent/chat', data),
 };
 
 export default api;

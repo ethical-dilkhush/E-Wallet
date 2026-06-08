@@ -18,4 +18,7 @@ public final class RabbitTopics {
 
     public static final String WALLET_RESULT_QUEUE = "ewallet.wallet.result.q";
     public static final String WALLET_RESULT_ROUTING_KEY = "wallet.result";
+
+    public static final String PASSWORD_RESET_QUEUE = "ewallet.password.reset.q";
+    public static final String PASSWORD_RESET_ROUTING_KEY = "password.reset.requested";
 }

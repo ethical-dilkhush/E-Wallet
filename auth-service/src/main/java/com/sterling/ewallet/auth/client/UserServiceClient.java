@@ -1,5 +1,7 @@
 package com.sterling.ewallet.auth.client;
 
+import com.sterling.ewallet.auth.dto.ForgotPasswordRequest;
+import com.sterling.ewallet.auth.dto.ResetPasswordRequest;
 import com.sterling.ewallet.common.dto.ApiResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,4 +17,10 @@ public interface UserServiceClient {
 
     @GetMapping("/internal/by-username")
     ApiResponse<UserCredentialsResponse> findByUsername(@RequestParam("username") String username);
+
+    @PostMapping("/internal/password-reset/request")
+    ApiResponse<Void> requestPasswordReset(@RequestBody ForgotPasswordRequest request);
+
+    @PostMapping("/internal/password-reset/confirm")
+    ApiResponse<Void> confirmPasswordReset(@RequestBody ResetPasswordRequest request);
 }

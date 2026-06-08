@@ -10,6 +10,7 @@ const titleMap = {
   '/transfer': 'Send Money',
   '/topup': 'Add Funds',
   '/transactions': 'Transactions',
+  '/sterling-agent': 'Sterling Agent',
   '/profile': 'Profile & Settings',
 };
 

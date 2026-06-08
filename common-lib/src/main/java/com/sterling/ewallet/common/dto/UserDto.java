@@ -11,6 +11,7 @@ public class UserDto implements Serializable {
     private String email;
     private String fullName;
     private String phone;
+    private String avatar;
     private boolean active;
 
     public UserDto() {
@@ -54,6 +55,14 @@ public class UserDto implements Serializable {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     public boolean isActive() {

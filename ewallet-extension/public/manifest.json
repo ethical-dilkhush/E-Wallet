@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "Sterling E-Wallet",
+  "version": "1.0.0",
+  "description": "Manage your Sterling E-Wallet from your browser: check your balance, send money, add funds, view transaction history, and chat with the AI agent.",
+  "action": {
+    "default_popup": "index.html",
+    "default_title": "Sterling E-Wallet"
+  },
+  "permissions": ["storage"],
+  "host_permissions": [
+    "http://localhost:8080/*",
+    "https://localhost:8080/*",
+    "http://localhost:3000/*",
+    "http://127.0.0.1:3000/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["http://localhost:3000/*", "http://127.0.0.1:3000/*"],
+      "js": ["auth-bridge.js"],
+      "run_at": "document_start"
+    }
+  ],
+  "icons": {
+    "16": "icons/16.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  }
+}
+

@@ -1,6 +1,8 @@
 package com.sterling.ewallet.auth.controller;
 
+import com.sterling.ewallet.auth.dto.ForgotPasswordRequest;
 import com.sterling.ewallet.auth.dto.LoginRequest;
+import com.sterling.ewallet.auth.dto.ResetPasswordRequest;
 import com.sterling.ewallet.auth.dto.TokenResponse;
 import com.sterling.ewallet.auth.service.AuthService;
 import com.sterling.ewallet.common.dto.ApiResponse;
@@ -29,6 +31,20 @@ public class AuthController {
     public ResponseEntity<ApiResponse<TokenResponse>> login(@Valid @RequestBody LoginRequest request) {
         TokenResponse token = authService.login(request);
         return ResponseEntity.ok(ApiResponse.ok("Login successful", token));
+    }
+
+    @PostMapping("/forgot-password")
+    public ResponseEntity<ApiResponse<Void>> forgotPassword(@Valid @RequestBody ForgotPasswordRequest request) {
+        authService.forgotPassword(request.getEmail());
+        // Generic response regardless of whether the email is registered.
+        return ResponseEntity.ok(ApiResponse.ok(
+                "If an account exists for that email, a password reset link has been sent.", null));
+    }
+
+    @PostMapping("/reset-password")
+    public ResponseEntity<ApiResponse<Void>> resetPassword(@Valid @RequestBody ResetPasswordRequest request) {
+        authService.resetPassword(request.getToken(), request.getNewPassword());
+        return ResponseEntity.ok(ApiResponse.ok("Password reset successfully. You can now sign in.", null));
     }
 
     @PostMapping("/refresh")

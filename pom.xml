@@ -33,6 +33,8 @@
         <module>wallet-service</module>
         <module>transaction-service</module>
         <module>payment-service</module>
+        <module>agent-service</module>
+        <module>notification-service</module>
         <module>common-lib</module>
     </modules>
 
