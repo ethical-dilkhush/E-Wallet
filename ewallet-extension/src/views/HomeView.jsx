@@ -76,7 +76,7 @@ export default function HomeView({ onNavigate }) {
   return (
     <div className="h-full overflow-y-auto popup-scroll p-4 space-y-4">
       {/* Balance hero */}
-      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary-600 via-primary-700 to-primary-900 p-5 text-white shadow-lg shadow-primary-900/20">
+      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-cyan-700 via-cyan-800 to-cyan-950 p-5 text-white shadow-lg shadow-cyan-950/20">
         <div className="absolute top-0 right-0 w-40 h-40 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2" />
         <div className="relative">
           <div className="flex items-center justify-between">
@@ -85,8 +85,8 @@ export default function HomeView({ onNavigate }) {
                 <Wallet className="w-4 h-4" />
               </div>
               <div>
-                <div className="text-xs text-primary-200">Total balance</div>
-                <div className="text-[11px] text-primary-300">{currency} Wallet</div>
+                <div className="text-xs text-cyan-200">Total balance</div>
+                <div className="text-[11px] text-cyan-300">{currency} Wallet</div>
               </div>
             </div>
             <button
@@ -102,14 +102,14 @@ export default function HomeView({ onNavigate }) {
 
           <div className="mt-4 mb-5">
             <div className="text-3xl font-bold tracking-tight">{formatCurrency(wallet?.balance, currency)}</div>
-            <div className="text-[11px] text-primary-200 mt-1">Available balance</div>
+            <div className="text-[11px] text-cyan-200 mt-1">Available balance</div>
           </div>
 
           <div className="flex gap-2">
             <button
               type="button"
               onClick={() => onNavigate?.('send')}
-              className="flex-1 flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl bg-white text-primary-700 text-sm font-semibold hover:bg-primary-50 transition-colors shadow-sm"
+              className="flex-1 flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl bg-white text-cyan-800 text-sm font-semibold hover:bg-cyan-50 transition-colors shadow-sm"
             >
               <SendHorizontal className="w-4 h-4" /> Send
             </button>
@@ -127,22 +127,22 @@ export default function HomeView({ onNavigate }) {
       {/* Stats */}
       <div className="grid grid-cols-3 gap-2">
         <div className="bg-white rounded-xl p-3 border border-gray-100">
-          <div className="w-8 h-8 rounded-lg bg-primary-50 flex items-center justify-center mb-2">
-            <TrendingUp className="w-4 h-4 text-primary-600" />
+          <div className="w-8 h-8 rounded-lg bg-cyan-50 flex items-center justify-center mb-2">
+            <TrendingUp className="w-4 h-4 text-cyan-700" />
           </div>
           <div className="text-lg font-bold text-gray-900 leading-none">{txns.length}</div>
           <div className="text-[10px] text-gray-400 mt-1">Total</div>
         </div>
         <div className="bg-white rounded-xl p-3 border border-gray-100">
-          <div className="w-8 h-8 rounded-lg bg-success-50 flex items-center justify-center mb-2">
-            <ArrowUpRight className="w-4 h-4 text-success-600" />
+          <div className="w-8 h-8 rounded-lg bg-green-50 flex items-center justify-center mb-2">
+            <ArrowUpRight className="w-4 h-4 text-green-600" />
           </div>
           <div className="text-lg font-bold text-gray-900 leading-none">{completedCount}</div>
           <div className="text-[10px] text-gray-400 mt-1">Completed</div>
         </div>
         <div className="bg-white rounded-xl p-3 border border-gray-100">
-          <div className="w-8 h-8 rounded-lg bg-warning-50 flex items-center justify-center mb-2">
-            <History className="w-4 h-4 text-warning-600" />
+          <div className="w-8 h-8 rounded-lg bg-amber-50 flex items-center justify-center mb-2">
+            <History className="w-4 h-4 text-amber-600" />
           </div>
           <div className="text-lg font-bold text-gray-900 leading-none">{pendingCount}</div>
           <div className="text-[10px] text-gray-400 mt-1">Pending</div>
@@ -156,7 +156,7 @@ export default function HomeView({ onNavigate }) {
           <button
             type="button"
             onClick={() => onNavigate?.('txns')}
-            className="text-xs font-medium text-primary-600 hover:text-primary-700"
+            className="text-xs font-medium text-cyan-700 hover:text-cyan-800"
           >
             View all
           </button>
@@ -179,8 +179,8 @@ export default function HomeView({ onNavigate }) {
               const Icon = isSent ? ArrowUpRight : ArrowDownLeft;
               return (
                 <li key={t.reference || t.id} className="flex items-center gap-3 px-4 py-3">
-                  <div className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 ${isSent ? 'bg-danger-50' : 'bg-success-50'}`}>
-                    <Icon className={`w-4 h-4 ${isSent ? 'text-danger-500' : 'text-success-500'}`} />
+                  <div className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 ${isSent ? 'bg-red-50' : 'bg-green-50'}`}>
+                    <Icon className={`w-4 h-4 ${isSent ? 'text-red-500' : 'text-green-500'}`} />
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-medium text-gray-900 truncate">{txnTitle(t)}</p>
@@ -189,7 +189,7 @@ export default function HomeView({ onNavigate }) {
                       {t.reason ? ` • ${t.reason}` : ''}
                     </p>
                   </div>
-                  <div className={`text-sm font-semibold shrink-0 whitespace-nowrap text-right ${isSent ? 'text-danger-600' : 'text-success-600'}`}>
+                  <div className={`text-sm font-semibold shrink-0 whitespace-nowrap text-right ${isSent ? 'text-red-600' : 'text-green-600'}`}>
                     {isSent ? '-' : '+'}{formatCurrency(t.amount, currency)}
                   </div>
                 </li>
@@ -200,20 +200,20 @@ export default function HomeView({ onNavigate }) {
       </div>
 
       {/* Wallet details */}
-      <div className="bg-gradient-to-br from-primary-50 to-primary-100/50 rounded-2xl border border-primary-100 p-4">
-        <div className="text-sm font-semibold text-primary-900 mb-2">Wallet details</div>
+      <div className="bg-gradient-to-br from-cyan-50 to-cyan-100/50 rounded-2xl border border-cyan-100 p-4">
+        <div className="text-sm font-semibold text-cyan-950 mb-2">Wallet details</div>
         <div className="space-y-1.5 text-xs">
           <div className="flex justify-between gap-3">
-            <span className="text-primary-600">Wallet ID</span>
-            <span className="font-mono text-primary-800 truncate">{wallet?.id || '—'}</span>
+            <span className="text-cyan-700">Wallet ID</span>
+            <span className="font-mono text-cyan-900 truncate">{wallet?.id || '—'}</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-primary-600">Currency</span>
-            <span className="font-medium text-primary-800">{currency}</span>
+            <span className="text-cyan-700">Currency</span>
+            <span className="font-medium text-cyan-900">{currency}</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-primary-600">Owner</span>
-            <span className="font-medium text-primary-800">@{user?.username || '—'}</span>
+            <span className="text-cyan-700">Owner</span>
+            <span className="font-medium text-cyan-900">@{user?.username || '—'}</span>
           </div>
         </div>
       </div>

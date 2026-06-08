@@ -39,7 +39,7 @@ function Shell() {
       {/* Sticky header */}
       <header className="flex-shrink-0 px-4 py-3 border-b border-gray-100 bg-white flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary-600 to-primary-800 flex items-center justify-center">
+          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-700 to-cyan-900 flex items-center justify-center">
             <Wallet className="w-4 h-4 text-white" />
           </div>
           <div className="leading-tight">
@@ -52,8 +52,8 @@ function Shell() {
           onClick={() => setTab('profile')}
           className={`w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold transition-colors overflow-hidden ${
             tab === 'profile'
-              ? 'bg-primary-600 text-white ring-2 ring-primary-600 ring-offset-1'
-              : 'bg-primary-50 text-primary-700 hover:bg-primary-100'
+              ? 'bg-cyan-700 text-white ring-2 ring-cyan-700 ring-offset-1'
+              : 'bg-cyan-50 text-cyan-800 hover:bg-cyan-100'
           }`}
           title="Profile"
         >
@@ -86,12 +86,12 @@ function Shell() {
               type="button"
               onClick={() => setTab(t.id)}
               className={`py-2.5 flex flex-col items-center gap-1 text-[10px] font-medium transition-colors ${
-                active ? 'text-primary-700' : 'text-gray-500 hover:text-gray-800'
+                active ? 'text-cyan-800' : 'text-gray-500 hover:text-gray-800'
               }`}
             >
               <span
                 className={`w-9 h-7 rounded-lg flex items-center justify-center transition-colors ${
-                  active ? 'bg-primary-50' : ''
+                  active ? 'bg-cyan-50' : ''
                 }`}
               >
                 <Icon className="w-[18px] h-[18px]" />

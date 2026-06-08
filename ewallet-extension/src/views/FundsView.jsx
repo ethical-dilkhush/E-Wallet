@@ -26,7 +26,7 @@ export default function FundsView() {
 
   return (
     <div className="h-full overflow-y-auto popup-scroll p-4 space-y-4">
-      <div className="rounded-2xl bg-gradient-to-r from-success-600 to-primary-600 p-5 text-white shadow-sm">
+      <div className="rounded-2xl bg-gradient-to-r from-green-600 to-cyan-700 p-5 text-white shadow-sm">
         <div className="flex items-center gap-2 mb-1">
           <PlusCircle className="w-5 h-5" />
           <div className="text-lg font-bold">Add Funds</div>
@@ -48,7 +48,7 @@ export default function FundsView() {
                 onClick={() => setAmount(String(val))}
                 className={`py-2.5 rounded-xl text-xs font-semibold border-2 transition-all ${
                   amount === String(val)
-                    ? 'border-primary-500 bg-primary-50 text-primary-700'
+                    ? 'border-cyan-600 bg-cyan-50 text-cyan-800'
                     : 'border-gray-200 text-gray-700 hover:border-gray-300 hover:bg-gray-50'
                 }`}
               >
@@ -69,14 +69,14 @@ export default function FundsView() {
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
               placeholder="0.00"
-              className="w-full pl-8 pr-3 py-3 rounded-xl border border-gray-200 bg-gray-50 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary-500 transition-all"
+              className="w-full pl-8 pr-3 py-3 rounded-xl border border-gray-200 bg-gray-50 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-cyan-600/30 focus:border-cyan-600 transition-all"
             />
           </div>
         </div>
 
-        <div className="flex items-start gap-2 p-3 rounded-xl bg-primary-50 border border-primary-100">
-          <ShieldCheck className="w-4 h-4 text-primary-600 mt-0.5 flex-shrink-0" />
-          <p className="text-[11px] text-primary-700/90 leading-relaxed">
+        <div className="flex items-start gap-2 p-3 rounded-xl bg-cyan-50 border border-cyan-100">
+          <ShieldCheck className="w-4 h-4 text-cyan-700 mt-0.5 flex-shrink-0" />
+          <p className="text-[11px] text-cyan-800/90 leading-relaxed">
             Payment opens in the Sterling web app in a new tab, where Razorpay's secure
             checkout (card, UPI, netbanking) runs. Your wallet is credited only after the
             payment is verified.
@@ -86,7 +86,7 @@ export default function FundsView() {
         <button
           type="button"
           onClick={openPayment}
-          className="w-full py-3 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-success-600 to-primary-600 hover:from-success-700 hover:to-primary-700 shadow-lg shadow-primary-600/25 transition-all flex items-center justify-center gap-2"
+          className="w-full py-3 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-green-600 to-cyan-700 hover:from-green-700 hover:to-cyan-800 shadow-lg shadow-cyan-700/25 transition-all flex items-center justify-center gap-2"
         >
           <ExternalLink className="w-4 h-4" />
           Continue to secure payment

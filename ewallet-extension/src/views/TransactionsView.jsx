@@ -42,7 +42,7 @@ export default function TransactionsView() {
             <Loader2 className="w-5 h-5 animate-spin" />
           </div>
         ) : err ? (
-          <div className="p-4 rounded-2xl bg-danger-50 border border-danger-500/20 text-danger-600 text-sm font-medium">
+          <div className="p-4 rounded-2xl bg-red-50 border border-red-500/20 text-red-600 text-sm font-medium">
             {err}
           </div>
         ) : rows.length === 0 ? (
@@ -59,8 +59,8 @@ export default function TransactionsView() {
                 <div key={t.reference || `${t.createdAt}-${t.amount}`} className="bg-white border border-gray-100 rounded-2xl p-4">
                   <div className="flex items-start justify-between gap-3">
                     <div className="flex items-start gap-3 min-w-0">
-                      <div className={`w-9 h-9 rounded-xl flex items-center justify-center ${isDebit ? 'bg-danger-50' : 'bg-success-50'}`}>
-                        <Icon className={`w-4 h-4 ${isDebit ? 'text-danger-600' : 'text-success-600'}`} />
+                      <div className={`w-9 h-9 rounded-xl flex items-center justify-center ${isDebit ? 'bg-red-50' : 'bg-green-50'}`}>
+                        <Icon className={`w-4 h-4 ${isDebit ? 'text-red-600' : 'text-green-600'}`} />
                       </div>
                       <div className="min-w-0">
                         <div className="text-sm font-medium text-gray-900 truncate">
@@ -72,7 +72,7 @@ export default function TransactionsView() {
                         </div>
                       </div>
                     </div>
-                    <div className={`text-sm font-semibold shrink-0 whitespace-nowrap text-right ${isDebit ? 'text-danger-600' : 'text-success-600'}`}>
+                    <div className={`text-sm font-semibold shrink-0 whitespace-nowrap text-right ${isDebit ? 'text-red-600' : 'text-green-600'}`}>
                       {isDebit ? '-' : '+'}{formatCurrency(t?.amount, currency)}
                     </div>
                   </div>

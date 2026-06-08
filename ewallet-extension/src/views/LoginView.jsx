@@ -50,7 +50,7 @@ export default function LoginView() {
   return (
     <div className="min-h-[600px] flex items-center justify-center p-5">
       <div className="w-full max-w-sm bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-        <div className="bg-gradient-to-r from-primary-600 to-primary-800 px-6 py-6 text-white">
+        <div className="bg-gradient-to-r from-cyan-700 to-cyan-900 px-6 py-6 text-white">
           <div className="text-lg font-bold">Sterling E-Wallet</div>
           <div className="text-sm text-white/80">
             {mode === 'login' ? 'Sign in to continue' : 'Reset your password'}
@@ -60,7 +60,7 @@ export default function LoginView() {
         {mode === 'login' ? (
           <form onSubmit={onSubmit} className="p-6 space-y-4">
             {err && (
-              <div className="p-3 rounded-xl bg-danger-50 border border-danger-500/20 text-danger-600 text-sm font-medium">
+              <div className="p-3 rounded-xl bg-red-50 border border-red-500/20 text-red-600 text-sm font-medium">
                 {err}
               </div>
             )}
@@ -73,7 +73,7 @@ export default function LoginView() {
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   autoComplete="username"
-                  className="w-full pl-10 pr-3 py-3 rounded-xl border border-gray-200 bg-gray-50 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary-500 transition-all"
+                  className="w-full pl-10 pr-3 py-3 rounded-xl border border-gray-200 bg-gray-50 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-600/30 focus:border-cyan-600 transition-all"
                   placeholder="Enter username"
                   required
                 />
@@ -89,7 +89,7 @@ export default function LoginView() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   autoComplete="current-password"
-                  className="w-full pl-10 pr-3 py-3 rounded-xl border border-gray-200 bg-gray-50 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary-500 transition-all"
+                  className="w-full pl-10 pr-3 py-3 rounded-xl border border-gray-200 bg-gray-50 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-600/30 focus:border-cyan-600 transition-all"
                   placeholder="Enter password"
                   required
                 />
@@ -100,7 +100,7 @@ export default function LoginView() {
               <button
                 type="button"
                 onClick={() => setMode('forgot')}
-                className="text-xs font-medium text-primary-600 hover:text-primary-700"
+                className="text-xs font-medium text-cyan-700 hover:text-cyan-800"
               >
                 Forgot password?
               </button>
@@ -109,7 +109,7 @@ export default function LoginView() {
             <button
               type="submit"
               disabled={loading || !username.trim() || !password}
-              className="w-full py-3.5 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 shadow-lg shadow-primary-600/25 transition-all disabled:opacity-50 flex items-center justify-center gap-2"
+              className="w-full py-3.5 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-cyan-700 to-cyan-800 hover:from-cyan-800 hover:to-cyan-900 shadow-lg shadow-cyan-700/25 transition-all disabled:opacity-50 flex items-center justify-center gap-2"
             >
               {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : null}
               {loading ? 'Signing in…' : 'Sign in'}
@@ -133,7 +133,7 @@ export default function LoginView() {
                       value={forgotEmail}
                       onChange={(e) => setForgotEmail(e.target.value)}
                       autoComplete="email"
-                      className="w-full pl-10 pr-3 py-3 rounded-xl border border-gray-200 bg-gray-50 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary-500 transition-all"
+                      className="w-full pl-10 pr-3 py-3 rounded-xl border border-gray-200 bg-gray-50 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-600/30 focus:border-cyan-600 transition-all"
                       placeholder="you@example.com"
                       required
                     />
@@ -143,7 +143,7 @@ export default function LoginView() {
                 <button
                   type="submit"
                   disabled={forgotLoading || !forgotEmail.trim()}
-                  className="w-full py-3.5 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 shadow-lg shadow-primary-600/25 transition-all disabled:opacity-50 flex items-center justify-center gap-2"
+                  className="w-full py-3.5 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-cyan-700 to-cyan-800 hover:from-cyan-800 hover:to-cyan-900 shadow-lg shadow-cyan-700/25 transition-all disabled:opacity-50 flex items-center justify-center gap-2"
                 >
                   {forgotLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : null}
                   {forgotLoading ? 'Sending…' : 'Send reset link'}
@@ -151,8 +151,8 @@ export default function LoginView() {
               </form>
             ) : (
               <div className="text-center py-2">
-                <div className="w-12 h-12 rounded-full bg-success-50 flex items-center justify-center mx-auto mb-3">
-                  <CheckCircle className="w-6 h-6 text-success-600" />
+                <div className="w-12 h-12 rounded-full bg-green-50 flex items-center justify-center mx-auto mb-3">
+                  <CheckCircle className="w-6 h-6 text-green-600" />
                 </div>
                 <p className="text-sm font-semibold text-gray-900 mb-1">Check your email</p>
                 <p className="text-xs text-gray-500">
@@ -165,7 +165,7 @@ export default function LoginView() {
             <button
               type="button"
               onClick={backToLogin}
-              className="inline-flex items-center gap-1.5 text-xs font-medium text-primary-600 hover:text-primary-700"
+              className="inline-flex items-center gap-1.5 text-xs font-medium text-cyan-700 hover:text-cyan-800"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
               Back to sign in

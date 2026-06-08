@@ -71,13 +71,13 @@ export default function ProfileView() {
     <div className="h-full overflow-y-auto popup-scroll p-4 space-y-4">
       {/* Header card */}
       <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden">
-        <div className="bg-gradient-to-r from-primary-600 to-primary-800 h-20" />
+        <div className="bg-gradient-to-r from-cyan-700 to-cyan-900 h-20" />
         <div className="px-4 pb-4 -mt-10">
           <div className="w-20 h-20 rounded-2xl bg-white border-4 border-white shadow-lg flex items-center justify-center overflow-hidden">
             {user?.avatar ? (
               <img src={user.avatar} alt="Profile" className="w-full h-full object-cover" />
             ) : (
-              <span className="text-2xl font-bold text-primary-600">
+              <span className="text-2xl font-bold text-cyan-700">
                 {user?.username?.charAt(0)?.toUpperCase() || 'U'}
               </span>
             )}
@@ -89,13 +89,13 @@ export default function ProfileView() {
           <div className="flex flex-wrap items-center gap-2 mt-2">
             <span
               className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold ${
-                user?.active !== false ? 'bg-success-50 text-success-600' : 'bg-danger-50 text-danger-600'
+                user?.active !== false ? 'bg-green-50 text-green-600' : 'bg-red-50 text-red-600'
               }`}
             >
               <CheckCircle className="w-3 h-3" />
               {user?.active !== false ? 'Active' : 'Inactive'}
             </span>
-            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-primary-50 text-primary-600 max-w-full truncate">
+            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-cyan-50 text-cyan-700 max-w-full truncate">
               Wallet: {wallet?.id || '—'}
             </span>
           </div>
@@ -135,8 +135,8 @@ export default function ProfileView() {
             onClick={() => setShowPasswordForm(true)}
             className="w-full flex items-center gap-3 p-3 rounded-xl border border-gray-200 hover:bg-gray-50 transition-colors text-left"
           >
-            <div className="w-9 h-9 rounded-lg bg-warning-50 flex items-center justify-center shrink-0">
-              <Key className="w-4 h-4 text-warning-600" />
+            <div className="w-9 h-9 rounded-lg bg-amber-50 flex items-center justify-center shrink-0">
+              <Key className="w-4 h-4 text-amber-600" />
             </div>
             <div>
               <p className="text-sm font-medium text-gray-900">Change Password</p>
@@ -149,8 +149,8 @@ export default function ProfileView() {
               <div
                 className={`p-2.5 rounded-lg text-xs font-medium ${
                   msg.type === 'success'
-                    ? 'bg-success-50 text-success-600 border border-success-500/20'
-                    : 'bg-danger-50 text-danger-600 border border-danger-500/20'
+                    ? 'bg-green-50 text-green-600 border border-green-500/20'
+                    : 'bg-red-50 text-red-600 border border-red-500/20'
                 }`}
               >
                 {msg.text}
@@ -171,7 +171,7 @@ export default function ProfileView() {
                     onChange={(e) => setPw((prev) => ({ ...prev, [field.key]: e.target.value }))}
                     placeholder={field.placeholder}
                     autoComplete={field.key === 'current' ? 'current-password' : 'new-password'}
-                    className="w-full pl-3 pr-9 py-2.5 rounded-xl border border-gray-200 bg-gray-50 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary-500 transition-all"
+                    className="w-full pl-3 pr-9 py-2.5 rounded-xl border border-gray-200 bg-gray-50 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-600/30 focus:border-cyan-600 transition-all"
                   />
                   <button
                     type="button"
@@ -189,7 +189,7 @@ export default function ProfileView() {
               <button
                 type="submit"
                 disabled={changing}
-                className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 transition-all disabled:opacity-50"
+                className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-cyan-700 to-cyan-800 hover:from-cyan-800 hover:to-cyan-900 transition-all disabled:opacity-50"
               >
                 {changing && <Loader2 className="w-4 h-4 animate-spin" />}
                 {changing ? 'Updating…' : 'Update'}
@@ -213,7 +213,7 @@ export default function ProfileView() {
           <button
             type="button"
             onClick={() => setConfirm(true)}
-            className="w-full flex items-center gap-2 justify-center py-3 rounded-xl text-sm font-semibold text-danger-600 border-2 border-danger-200 hover:bg-danger-50 transition-colors"
+            className="w-full flex items-center gap-2 justify-center py-3 rounded-xl text-sm font-semibold text-red-600 border-2 border-red-200 hover:bg-red-50 transition-colors"
           >
             <LogOut className="w-4 h-4" />
             Sign Out
@@ -232,7 +232,7 @@ export default function ProfileView() {
               <button
                 type="button"
                 onClick={logout}
-                className="px-4 py-2 rounded-xl text-sm font-medium bg-danger-600 text-white hover:bg-danger-700 transition-colors"
+                className="px-4 py-2 rounded-xl text-sm font-medium bg-red-600 text-white hover:bg-red-700 transition-colors"
               >
                 Yes, sign out
               </button>

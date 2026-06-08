@@ -75,7 +75,7 @@ export default function AgentView() {
                   key={p}
                   type="button"
                   onClick={() => send(p)}
-                  className="px-3 py-2 rounded-xl text-xs font-medium border border-gray-200 bg-white text-gray-700 hover:border-primary-300 hover:bg-primary-50 hover:text-primary-700 transition-colors"
+                  className="px-3 py-2 rounded-xl text-xs font-medium border border-gray-200 bg-white text-gray-700 hover:border-cyan-300 hover:bg-cyan-50 hover:text-cyan-800 transition-colors"
                 >
                   {p}
                 </button>
@@ -88,11 +88,11 @@ export default function AgentView() {
           <div key={i} className={`flex items-start gap-3 ${m.role === 'user' ? 'flex-row-reverse' : ''}`}>
             <div
               className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
-                m.role === 'user' ? 'bg-primary-100' : 'bg-gradient-to-br from-primary-500 to-primary-700'
+                m.role === 'user' ? 'bg-cyan-100' : 'bg-gradient-to-br from-cyan-600 to-cyan-800'
               }`}
             >
               {m.role === 'user' ? (
-                <span className="text-xs font-semibold text-primary-700">U</span>
+                <span className="text-xs font-semibold text-cyan-800">U</span>
               ) : (
                 <Sparkles className="w-4 h-4 text-white" />
               )}
@@ -100,7 +100,7 @@ export default function AgentView() {
             <div
               className={`max-w-[82%] px-4 py-2.5 rounded-2xl text-sm leading-relaxed ${
                 m.role === 'user'
-                  ? 'bg-primary-600 text-white rounded-tr-sm whitespace-pre-wrap'
+                  ? 'bg-cyan-700 text-white rounded-tr-sm whitespace-pre-wrap'
                   : 'bg-white border border-gray-100 text-gray-800 rounded-tl-sm shadow-sm prose prose-sm prose-gray max-w-none'
               }`}
             >
@@ -111,11 +111,11 @@ export default function AgentView() {
 
         {loading ? (
           <div className="flex items-start gap-3">
-            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center flex-shrink-0">
+            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-600 to-cyan-800 flex items-center justify-center flex-shrink-0">
               <Sparkles className="w-4 h-4 text-white" />
             </div>
             <div className="px-4 py-3 rounded-2xl rounded-tl-sm bg-white border border-gray-100 shadow-sm">
-              <Loader2 className="w-4 h-4 text-primary-500 animate-spin" />
+              <Loader2 className="w-4 h-4 text-cyan-600 animate-spin" />
             </div>
           </div>
         ) : null}
@@ -134,12 +134,12 @@ export default function AgentView() {
               }
             }}
             placeholder="Ask about your wallet..."
-            className="flex-1 resize-none px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary-500 transition-all max-h-24"
+            className="flex-1 resize-none px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-600/30 focus:border-cyan-600 transition-all max-h-24"
           />
           <button
             type="submit"
             disabled={loading || !input.trim()}
-            className="p-3 rounded-xl text-white bg-primary-600 hover:bg-primary-700 shadow-lg shadow-primary-600/25 transition-all disabled:opacity-50 flex-shrink-0"
+            className="p-3 rounded-xl text-white bg-cyan-700 hover:bg-cyan-800 shadow-lg shadow-cyan-700/25 transition-all disabled:opacity-50 flex-shrink-0"
             title="Send"
           >
             {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : <SendHorizontal className="w-5 h-5" />}

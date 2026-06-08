@@ -142,12 +142,12 @@ export default function SendView({ onDone }) {
       <div className="flex-1 min-h-0 px-4 pb-4 overflow-y-auto popup-scroll">
         <div className="bg-white border border-gray-100 rounded-2xl p-4 space-y-4">
           {err && (
-            <div className="p-3 rounded-xl bg-danger-50 border border-danger-500/20 text-danger-600 text-sm font-medium">
+            <div className="p-3 rounded-xl bg-red-50 border border-red-500/20 text-red-600 text-sm font-medium">
               {err}
             </div>
           )}
           {ok && (
-            <div className="p-3 rounded-xl bg-success-50 border border-success-500/20 text-success-700 text-sm font-medium">
+            <div className="p-3 rounded-xl bg-green-50 border border-green-500/20 text-green-700 text-sm font-medium">
               {ok}
             </div>
           )}
@@ -164,7 +164,7 @@ export default function SendView({ onDone }) {
                 onBlur={() => setTimeout(() => setShowSuggestions(false), 150)}
                 autoComplete="off"
                 placeholder="Start typing…"
-                className="w-full pl-10 pr-10 py-3 rounded-xl border border-gray-200 bg-gray-50 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary-500 transition-all"
+                className="w-full pl-10 pr-10 py-3 rounded-xl border border-gray-200 bg-gray-50 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-600/30 focus:border-cyan-600 transition-all"
               />
               {searching && (
                 <Loader2 className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 animate-spin" />
@@ -177,10 +177,10 @@ export default function SendView({ onDone }) {
                         type="button"
                         onMouseDown={(e) => e.preventDefault()}
                         onClick={() => selectRecipient(u)}
-                        className="w-full flex items-center gap-3 px-3 py-2.5 hover:bg-primary-50 text-left transition-colors"
+                        className="w-full flex items-center gap-3 px-3 py-2.5 hover:bg-cyan-50 text-left transition-colors"
                       >
-                        <div className="w-8 h-8 rounded-full bg-primary-100 flex items-center justify-center shrink-0">
-                          <span className="text-sm font-bold text-primary-700">{u.username?.charAt(0)?.toUpperCase()}</span>
+                        <div className="w-8 h-8 rounded-full bg-cyan-100 flex items-center justify-center shrink-0">
+                          <span className="text-sm font-bold text-cyan-800">{u.username?.charAt(0)?.toUpperCase()}</span>
                         </div>
                         <div className="min-w-0">
                           <p className="text-sm font-medium text-gray-900 truncate">@{u.username}</p>
@@ -202,7 +202,7 @@ export default function SendView({ onDone }) {
                 value={form.toUserId}
                 onChange={handle}
                 placeholder="USR-…"
-                className="flex-1 px-3 py-3 rounded-xl border border-gray-200 bg-gray-50 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary-500 transition-all"
+                className="flex-1 px-3 py-3 rounded-xl border border-gray-200 bg-gray-50 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-cyan-600/30 focus:border-cyan-600 transition-all"
               />
               <button
                 type="button"
@@ -232,7 +232,7 @@ export default function SendView({ onDone }) {
               value={form.amount}
               onChange={handle}
               placeholder="0.00"
-              className="w-full px-3 py-3 rounded-xl border border-gray-200 bg-gray-50 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary-500 transition-all"
+              className="w-full px-3 py-3 rounded-xl border border-gray-200 bg-gray-50 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-600/30 focus:border-cyan-600 transition-all"
             />
           </div>
 
@@ -243,7 +243,7 @@ export default function SendView({ onDone }) {
               value={form.reason}
               onChange={handle}
               placeholder="e.g. rent"
-              className="w-full px-3 py-3 rounded-xl border border-gray-200 bg-gray-50 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary-500 transition-all"
+              className="w-full px-3 py-3 rounded-xl border border-gray-200 bg-gray-50 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-600/30 focus:border-cyan-600 transition-all"
             />
           </div>
 
@@ -251,7 +251,7 @@ export default function SendView({ onDone }) {
             type="button"
             onClick={sendMoney}
             disabled={sending}
-            className="w-full py-3.5 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 shadow-lg shadow-primary-600/25 transition-all disabled:opacity-50 flex items-center justify-center gap-2"
+            className="w-full py-3.5 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-cyan-700 to-cyan-800 hover:from-cyan-800 hover:to-cyan-900 shadow-lg shadow-cyan-700/25 transition-all disabled:opacity-50 flex items-center justify-center gap-2"
           >
             {sending ? <Loader2 className="w-4 h-4 animate-spin" /> : <SendHorizontal className="w-4 h-4" />}
             {sending ? 'Sending…' : 'Send now'}
