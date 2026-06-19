@@ -1,8 +1,8 @@
 # Sterling Corporation E-Wallet
 
 A modernised, microservices-based reimplementation of Sterling's E-Wallet platform.
-The legacy monolith — where user management, transactions and balance management
-were tightly coupled — is decomposed into independent services that scale, deploy,
+The legacy monolith -  where user management, transactions and balance management
+were tightly coupled - is decomposed into independent services that scale, deploy,
 and fail independently, and communicate primarily through asynchronous events.
 
 ---
