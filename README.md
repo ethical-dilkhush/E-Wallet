@@ -1,4 +1,4 @@
-# Sterling Corporation E-Wallet — Microservices Platform
+# Sterling Corporation E-Wallet
 
 A modernised, microservices-based reimplementation of Sterling's E-Wallet platform.
 The legacy monolith — where user management, transactions and balance management
