@@ -38,8 +38,32 @@ and fail independently, and communicate primarily through asynchronous events.
 │ :8084              │ ◄──── WalletOperationResult event ─── │ Balance, ledger,  │
 │ /api/transactions  │                                       │ auto-provisioning │
 │ Persists state in  │                                       │  on user create   │
-│ H2 (txn history)   │                                       └───────────────────┘
-└────────────────────┘
+│ H2 (txn history)   │                                       └─────────┬─────────┘
+└────────────────────┘                                                 │
+                                                                       │ Wallet events
+                                                                       ▼
+                                                           ┌───────────────────────┐
+                                                           │ Payment Service       │ :8085
+                                                           │ External gateway      │
+                                                           │ integration, top-ups  │
+                                                           └─────────┬────────────┘
+                                                                     │
+                                                                     ▼
+                                                           ┌───────────────────────┐
+                                                           │ Notification Service  │ :8086
+                                                           │ Email/SMS/push alerts │
+                                                           │ Consumes txn.completed│
+                                                           └─────────┬────────────┘
+                                                                     │
+                                                                     ▼
+                                                           ┌───────────────────────┐
+                                                           │ Agent Service         │ :8087
+                                                           │ Background jobs,      │
+                                                           │ reconciliation,       │
+                                                           │ scheduled tasks       │
+                                                           └───────────────────────┘
+
+
 ```
 
 ### Services
@@ -330,7 +354,12 @@ E-Wallet/
 ├── user-service/               # Users (H2 file-based)
 ├── wallet-service/             # Wallets + ledger (H2 file-based)
 ├── transaction-service/        # Transactions (H2 file-based)
-└── ewallet-ui/                 # React frontend
+├── payment-service/            # Payment gateway integration
+├── notification-service/       # Email/SMS notifications
+├── agent-service/              # Background agents / schedulers
+├── ewallet-ui/                 # React frontend
+├── ewallet-extension/          # Browser extension (Chrome/Firefox)
+└── README.md / .gitignore      # Documentation & config
 ```
 
 ---
