@@ -1,7 +1,7 @@
-# Sterling Corporation E-Wallet
+# E-Wallet
 
-A modernised, microservices-based reimplementation of Sterling's E-Wallet platform.
-The legacy monolith -  where user management, transactions and balance management
+A modernised, microservices-based reimplementation of a production E-Wallet platform.
+The legacy monolith — where user management, transactions and balance management
 were tightly coupled - is decomposed into independent services that scale, deploy,
 and fail independently, and communicate primarily through asynchronous events.
 
@@ -395,4 +395,4 @@ E-Wallet/
 
 ## 14. License
 
-Internal Sterling Corporation project — not for redistribution.
+MIT License — see [LICENSE](LICENSE).
